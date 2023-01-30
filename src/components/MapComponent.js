@@ -1,7 +1,7 @@
-import * as React from "react";
+import React, {useRef} from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import 'leaflet/dist/leaflet.css';
-import L from 'leaflet';
+import L, { map } from 'leaflet';
 
 delete L.Icon.Default.prototype._getIconUrl;
 
@@ -12,9 +12,20 @@ L.Icon.Default.mergeOptions({
 });
 
 export const MapComponent = (props) => {
+  const mapRef = useRef();
+
+  function handleSetView(coordinates){
+    //const {current = {}} = mapRef;
+    //const { leafletElement: MapContainer} = current;
+    //MapContainer.setView(coordinates, 13)
+    mapRef.current.setView(coordinates,13);
+    console.log(coordinates)
+    
+  }
+
     return (
         <div className='map-container'>
-        <MapContainer center={props.center} zoom={props.zoom} style={{height: '100%', width: '100%'}}>
+        <MapContainer ref={mapRef} center={props.center} zoom={props.zoom} style={{height: '100%', width: '100%'}}>
           <TileLayer
             attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
             url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png"
@@ -25,6 +36,7 @@ export const MapComponent = (props) => {
             </Popup>
           </Marker>
         </MapContainer>
+        <button onClick={()=> handleSetView(props.center)}>change location</button>
         </div>
     )
 }
