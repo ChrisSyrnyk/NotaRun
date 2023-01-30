@@ -31,11 +31,11 @@
     position: relative;
     margin: auto;
     margin-top: 70px;
-    width: 80vw;
+    width: 90vw;
     height: 40px;
     background-color: rgb(58, 57, 57);
-    border-left: 10px solid rgb(58, 57, 57);
-    border-right: 10px solid rgb(58, 57, 57);
+    border-left: 5px solid rgb(58, 57, 57);
+    border-right: 5px solid rgb(58, 57, 57);
 }
 
 .selection-text{
@@ -51,14 +51,13 @@
 .map-container{
     display: flex;
     position: relative;
-    width: 80vw;
-    max-width: 600px;
-    height: 80vw;
+    width: 90vw;
+    height: 90vw;
     max-height: 600px;
     margin: auto;
     margin-top: 10px;
     background-color: whitesmoke;
-    border: 10px solid rgb(58, 57, 57);
+    border: 5px solid rgb(58, 57, 57);
 }
 
 
