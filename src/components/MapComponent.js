@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import 'leaflet/dist/leaflet.css';
 import L, { map } from 'leaflet';
@@ -13,17 +13,22 @@ L.Icon.Default.mergeOptions({
 
 export const MapComponent = (props) => {
   const mapRef = useRef();
-
-  function handleSetView(coordinates){
-    //const {current = {}} = mapRef;
-    //const { leafletElement: MapContainer} = current;
-    //MapContainer.setView(coordinates, 13)
-    mapRef.current.setView(coordinates,13);
-    console.log(coordinates)
-    
+  let lastLocation = [51.505, -0.09]
+  function handleSetView(coordinates, zoom){
+    mapRef.current.setView(coordinates, zoom);
   }
 
+    useEffect(() => {
+      console.log('location changed');
+      console.log(props);
+      console.log(mapRef)
+      if (mapRef.current != null){
+       handleSetView(props.center, props.zoom);
+      }
+    }, props.center); //when location changes
+    
     return (
+      
         <div className='map-container'>
         <MapContainer ref={mapRef} center={props.center} zoom={props.zoom} style={{height: '100%', width: '100%'}}>
           <TileLayer
@@ -36,7 +41,8 @@ export const MapComponent = (props) => {
             </Popup>
           </Marker>
         </MapContainer>
-        <button onClick={()=> handleSetView(props.center)}>change location</button>
         </div>
+        
     )
+    
 }

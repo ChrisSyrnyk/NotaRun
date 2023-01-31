@@ -3,34 +3,19 @@ import styles from './styles/styles.css'
 import { MapComponent } from './components/MapComponent';
 import React, {useState} from 'react';
 
-const options = {
-  enableHighAccuracy: true,
-  timeout: 5000,
-  maximumAge: 0
-};
-
-
-
-function error(err) {
-  console.warn(`ERROR(${err.code}): ${err.message}`);
-}
-
-
-
 function App() {
 
-  const[currentLocation, setCurrentLocation] = useState([51.505, -0.09])
+  const[currentLocation, setCurrentLocation] = useState([51.505, -0.09]);
+  const[currentZoom, setCurrentZoom] = useState([2]);
+
+  
   
   function success(pos) {
     const crd = pos.coords;
-    console.log(pos.coords);
     setCurrentLocation([crd.latitude, crd.longitude]);
-
   }
 
-  function updateCurrentLocation(){
-    console.log(currentLocation)
-  }
+
 
   return (
     <>
@@ -40,10 +25,9 @@ function App() {
       <div className='location'>
         <div className='selection-text center'>Location</div>
       </div>
-      <button onClick = {()=>navigator.geolocation.getCurrentPosition(success, error, options)}>position</button>
-      <button onClick = {()=> updateCurrentLocation()}>log location</button>
+      <button onClick = {()=> navigator.geolocation.getCurrentPosition(success)}>position</button>
 
-      <MapComponent zoom = {13} center = {currentLocation}/>
+      <MapComponent zoom = {currentZoom} center = {currentLocation}/>
 
       
     </>
