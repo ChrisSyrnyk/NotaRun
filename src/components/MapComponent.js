@@ -14,18 +14,36 @@ L.Icon.Default.mergeOptions({
 export const MapComponent = (props) => {
   const mapRef = useRef();
   let lastLocation = [51.505, -0.09]
+
   function handleSetView(coordinates, zoom){
     mapRef.current.setView(coordinates, zoom);
   }
 
     useEffect(() => {
-      console.log('location changed');
-      console.log(props);
-      console.log(mapRef)
       if (mapRef.current != null){
-       handleSetView(props.center, props.zoom);
+        handleSetView(props.center, props.zoom);
       }
+      
     }, props.center); //when location changes
+
+    function leafletLocate(){
+      mapRef.current.locate({setView: true})
+        .on('locationfound', function(e){
+          var marker = L.marker([e.latitude, e.longitude]).bindPopup('Your are here :)');
+          var circle = L.circle([e.latitude, e.longitude], e.accuracy/2, {
+              weight: 1,
+              color: 'blue',
+              fillColor: '#cacaca',
+              fillOpacity: 0.2
+          });
+          mapRef.current.addLayer(marker);
+          mapRef.current.addLayer(circle);
+        })
+        .on('locationerror', function(e){
+              console.log(e);
+              alert("Location access denied.");
+        });
+    }
     
     return (
       
@@ -41,6 +59,7 @@ export const MapComponent = (props) => {
             </Popup>
           </Marker>
         </MapContainer>
+        <div onClick={()=> leafletLocate()} className='location-button'>{'>'}</div>
         </div>
         
     )
