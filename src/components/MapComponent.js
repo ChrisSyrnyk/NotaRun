@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup, useMapEvents, Polyline } from "react-leaflet";
 import 'leaflet/dist/leaflet.css';
 import L, { map } from 'leaflet';
 
@@ -90,7 +90,7 @@ export const MapComponent = (props) => {
     }
     
 
-    
+    const limeOptions = {color: 'red'}
     
     return (
       
@@ -106,7 +106,7 @@ export const MapComponent = (props) => {
             url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png"
           />
           <MyComponent />
-          
+          <Polyline pathOptions={limeOptions} positions={props.markers} />
           {props.markers.map((position, idx) => 
           <Marker key={`marker-${idx}`} position={position}>
             <Popup>
