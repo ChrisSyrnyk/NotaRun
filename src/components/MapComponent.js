@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from "react-leaflet";
 import 'leaflet/dist/leaflet.css';
 import L, { map } from 'leaflet';
 
@@ -26,6 +26,7 @@ export const MapComponent = (props) => {
       
     }, props.center); //when location changes
 
+
     function leafletLocate(){
       mapRef.current.locate({setView: true})
         .on('locationfound', function(e){
@@ -44,23 +45,82 @@ export const MapComponent = (props) => {
               alert("Location access denied.");
         });
     }
+
+      /*
+    function getClickedLanLon(e) {
+
+      var lat,
+          lon,
+          zoom;
+  
+      lat = e.latlng.lat;
+      lon = e.latlng.lng;
+      zoom = map.getZoom();
+  
+      let marker2 = new L.Marker(new L.LatLng(lat, lon));
+      map.addLayer(marker2);
+    }
+    
+
+    if(mapRef.current!=null){
+      mapRef.current.on('click', function(e){
+        console.log('click');
+      })
+    }
+    
+    */
+
+    function MyComponent() {
+      const map = useMapEvents({
+        click: (e) => {
+          console.log(e.latlng);
+          AddMarker(e.latlng);
+        }
+      })
+      return null
+    }
+    
+
+    function AddMarker(location){
+      console.log('ran')
+      let tempMarkers = [... props.markers];
+      const newMarker = [location.lat, location.lng];
+      tempMarkers.push(newMarker);
+      props.setMarkers(tempMarkers);
+    }
+    
+
+    
     
     return (
       
         <div className='map-container'>
-        <MapContainer ref={mapRef} center={props.center} zoom={props.zoom} style={{height: '100%', width: '100%'}}>
+        <MapContainer  
+          ref={mapRef}  
+          center={props.center} 
+          zoom={props.zoom} 
+          style={{height: '100%', width: '100%'}}
+          >
           <TileLayer
             attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
             url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png"
           />
-          <Marker position={props.center}>
+          <MyComponent />
+          
+          {props.markers.map((position, idx) => 
+          <Marker key={`marker-${idx}`} position={position}>
             <Popup>
-              A pretty CSS3 popup. <br /> Easily customizable.
+              <span>Popups</span>
             </Popup>
           </Marker>
+          )}
+          
+          
         </MapContainer>
         <div onClick={()=> leafletLocate()} className='location-button'>{'>'}</div>
+        <div onClick={()=> console.log(props.markers)}>{'log markers'}</div>
         </div>
+
         
     )
     
