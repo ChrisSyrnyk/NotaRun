@@ -1,67 +1,47 @@
 
 import styles from './styles/styles.css'
 import { MapComponent } from './components/MapComponent';
-import { HeaderComponent } from './components/HeaderComponent.tsx';
 import React, {useState, useEffect} from 'react';
+import menuIcon from './img/menuIcon.png'
+import DropDownMenu from './components/DropDownMenu';
 
 function App() {
 
-  const[currentLocation, setCurrentLocation] = useState([49, -96]);
-  const[currentZoom, setCurrentZoom] = useState([3]);
-  const[markers, setMarkers] = useState([]);
-  const[distance, setDistance] = useState(0);
+  const[currentLocation, setCurrentLocation] = useState([49, -96]);     //current location
+  const[currentZoom, setCurrentZoom] = useState([3]);                   //starting zoom lvl
+  const[markers, setMarkers] = useState([]);                            //list of markers
+  const[distance, setDistance] = useState(0);                           //distance between markers
+  const[displayDropDown, setDisplayDropDown] = useState(false);         //dropdown state
+  const[units, setUnits] = useState('metric');                          //units displayed
+  const[removalAccountedFor, setRemovalAccountedFor] = useState(true);  //removed last marker
+
+  //Drop down menu toggle
+  function toggleDropDown(){
+    if(displayDropDown == false){
+      setDisplayDropDown(true);
+    } else {
+      setDisplayDropDown(false);
+    }
+  }
   
+  //Markers----------------------------------------------------------
   useEffect(() => {
-    totalDistance(); // This is be executed when the state changes
+    totalDistance(); // recalculate distance when markers change
 }, [markers]);
-
-
-
-  //geonavigate is slow. Try using ip-api
-  //https://ip-api.com/docs/api:json
-  //added benefit of returning more information (country, city, zip... )
-  
-  function retrieveCurrentCoord(){
-    fetch('http://ip-api.com/json/')
-    .then(function(response){
-      return response.json()
-    })
-    .then(function(response){
-      console.log(response);
-      setCurrentLocation([response.lat,response.lon])
-      setCurrentZoom(10)
-    })
-  }
-  
-  //geo locate way
-  function success(pos) {
-    const crd = pos.coords;
-    setCurrentLocation([crd.latitude, crd.longitude]);
-    setCurrentZoom(14);
-  }
-
-  function error(err) {
-    console.warn(`ERROR(${err.code}): ${err.message}`);
-  }
-
-  const options = {
-    enableHighAccuracy: true,
-    timeout: 5000,
-    maximumAge: 0
-  };
 
   function removeLastMarker(){
     let tempMarkers = [... markers];
     tempMarkers.pop();
     setMarkers(tempMarkers);
+    setRemovalAccountedFor(false);
   }
 
   function clearAllMarkers(){
     setMarkers([]);
   }
 
-  //calculate distance
-  //haversine formula
+  //Distance calculations--------------------------------------------
+  //calculate distance between two cord using the haversine formula
   function pointToPoint(a,b){
     const radius = 6371; //earths radius
     const lat1 = a[0] * Math.PI/180;
@@ -75,11 +55,15 @@ function App() {
     return radius * C;
   }
 
+  //Calculate total distance
   function totalDistance(){
     let i = 0;
     let km = 0;
     while (i+1 < markers.length){
-      km += pointToPoint(markers[i],markers[i+1]);
+      km += pointToPoint(
+        [markers[i]._latlng.lat,markers[i]._latlng.lng], 
+        [markers[i+1]._latlng.lat,markers[i+1]._latlng.lng]
+      ); //distance between two coord
       i++;
     }
     setDistance(km);
@@ -89,14 +73,29 @@ function App() {
   return (
     <>
       <div className='header-container'>
-        <div className='site-name'>Re<div className='bold-font'>D</div>irect</div>
+        <img src = {menuIcon} className='burger' onClick={()=>toggleDropDown()}></img>
+        <div className='site-name'>Nota<div className='bold-font'>R</div>un</div>
       </div>
-      <MapComponent zoom = {currentZoom} center = {currentLocation} markers={markers} setMarkers = {setMarkers}/>
-      <div onClick={()=> removeLastMarker()}>remove last marker</div>
-      <div onClick={()=> clearAllMarkers()}>clear All Markers</div>
-      <div onClick={()=> console.log(totalDistance())}>log distance</div>
-      <div>{distance +' km'}</div>
-      
+      <DropDownMenu 
+      displayDropDown = {displayDropDown} 
+      setUnits = {setUnits} units = {units}
+      />
+      <MapComponent 
+      zoom = {currentZoom} 
+      center = {[49, -96]} 
+      markers={markers} 
+      setMarkers = {setMarkers} 
+      distance = {distance} 
+      units = {units} 
+      setCurrentLocation = {setCurrentLocation} 
+      currentLocation = {currentLocation}
+      setRemovalAccountedFor = {setRemovalAccountedFor} 
+      removalAccountedFor = {removalAccountedFor}
+      />
+      <div className='tool-bar'>
+        <div className='tool-button' onClick={()=> removeLastMarker()}>Remove Last Marker</div>
+        <div className='tool-button' onClick={()=> clearAllMarkers()}>Clear All Markers</div>
+      </div>
     </>
   );
 }

@@ -1,3 +1,7 @@
+:root{
+    background-color: rgb(58, 57, 57);
+}
+
 .header-container{
     z-index: 2;
     display: flex;
@@ -10,6 +14,20 @@
     background-color: rgb(58, 57, 57);
 }
 
+.burger{
+    display: flex;
+    height: 80%;
+    width: auto;
+    margin: auto;
+    margin-left: 2px;
+    margin-right: 0;
+}
+
+.burger:active{
+    -webkit-transform: scale(0.97);
+            transform: scale(0.97);
+}
+
 .site-name{
     display: flex;
     flex-direction: row;
@@ -20,6 +38,7 @@
     color: white;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size: xx-large;
+    user-select: none;
 }
 
 .bold-font{
@@ -62,29 +81,168 @@
 .map-container{
     display: flex;
     position: relative;
-    width: 90vw;
-    height: 90vw;
-    max-height: 600px;
+    width: 100vw;
+    height: 70vh;
+    max-height: 700px;
     margin: auto;
-    margin-top: 90px;
+    margin-top: 60px;
     background-color: whitesmoke;
-    border: 5px solid rgb(58, 57, 57);
 }
 
 .location-button{
     position: absolute;
     top: 80px;
     left: 10px;
-    padding: 10px;
+    padding: 0px;
     z-index: 400;
-    width: 10px;
-    height: 10px;
+    width: 30px;
+    height: 30px;
     background-color: white;
     border: solid rgba(173, 173, 173, 0.693) 2px;
     border-radius: 4px;
     user-select: none;
 }
 
+.location-button:active{
+    -webkit-transform: scale(0.97);
+            transform: scale(0.97);
+}
+
+.km-display{
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    z-index: 400;
+    width: auto;
+    padding: 2px;
+    padding-left: 5px;
+    padding-right: 5px;
+    height: 20px;
+    background-color: white;
+    border: solid rgba(173, 173, 173, 0.693) 2px;
+    border-radius: 4px;
+    user-select: none;
+}
+
+.tool-bar{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 100vw;
+    height: 100px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.tool-button{
+    display: flex;
+    width: 200px;
+    height: auto;
+    margin: auto;
+    padding: 5px;
+    border-radius: 4px;
+    background-color: white;
+    font-size: larger;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    justify-content: center;
+}
+
+.tool-button:active{
+    -webkit-transform: scale(0.97);
+            transform: scale(0.97);
+}
+
+
+.drop-down-container{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    z-index: 10000;
+    width: 50vw;
+    max-width: 250px;
+    height: 70vh;
+    max-height: 700px;
+    background-color: rgb(136, 135, 135);
+}
+
+.drop-down-section{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 100%;
+    height: auto;
+    margin: auto;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: bold;
+}
+
+.drop-down-title{
+    display: flex;
+    position: relative;
+    width: auto;
+    height: auto;
+    margin: auto;
+    padding: 5px;
+    color: black;
+    font-size: larger;
+}
+
+.drop-down-div-line{
+    position: relative;
+    display: flex;
+    width: 95%;
+    margin: auto;
+    margin-top: 0px;
+    margin-bottom: 4px;
+    height: 2px;
+    border-radius: 1px;
+    background-color: white;
+}
+
+.toggle-div{
+    display: flex;
+    flex-direction: row;
+    width: auto;
+}
+
+.drop-down-button{
+    display: flex;
+    position: relative;
+    width: 40%;
+    height: auto;
+    margin: auto;
+    padding: 5px; 
+    background-color: white; 
+    border-radius: 5px;
+    justify-content: center;
+    user-select: none;
+}
+
+.green-button{
+    background-color: rgb(113, 171, 113);
+}
+
+.drop-down-button:active{
+    -webkit-transform: scale(0.97);
+            transform: scale(0.97);
+}
+
+.social-icon{
+    width: 50px;
+    height: 50px;
+    margin: auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.social-icon:active{
+    -webkit-transform: scale(0.97);
+            transform: scale(0.97);
+}
 
 
 
