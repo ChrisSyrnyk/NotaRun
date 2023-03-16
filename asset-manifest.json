@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/Redirect/static/css/main.023775bc.css",
-    "main.js": "/Redirect/static/js/main.21539966.js",
-    "static/media/locatingIcon.png": "/Redirect/static/media/locatingIcon.26fe7ea49b46bf2de25a.png",
-    "static/media/currentLocation.png": "/Redirect/static/media/currentLocation.b88fd2c9640ec80fe903.png",
-    "static/media/menuIcon.png": "/Redirect/static/media/menuIcon.a0112268c30589ffb806.png",
-    "index.html": "/Redirect/index.html",
-    "main.023775bc.css.map": "/Redirect/static/css/main.023775bc.css.map",
-    "main.21539966.js.map": "/Redirect/static/js/main.21539966.js.map"
+    "main.css": "/NotaRun/static/css/main.023775bc.css",
+    "main.js": "/NotaRun/static/js/main.c1298b32.js",
+    "static/media/locatingIcon.png": "/NotaRun/static/media/locatingIcon.26fe7ea49b46bf2de25a.png",
+    "static/media/currentLocation.png": "/NotaRun/static/media/currentLocation.b88fd2c9640ec80fe903.png",
+    "static/media/menuIcon.png": "/NotaRun/static/media/menuIcon.a0112268c30589ffb806.png",
+    "index.html": "/NotaRun/index.html",
+    "main.023775bc.css.map": "/NotaRun/static/css/main.023775bc.css.map",
+    "main.c1298b32.js.map": "/NotaRun/static/js/main.c1298b32.js.map"
   },
   "entrypoints": [
     "static/css/main.023775bc.css",
-    "static/js/main.21539966.js"
+    "static/js/main.c1298b32.js"
   ]
 }
