@@ -129,20 +129,31 @@
     flex-direction: column;
     position: relative;
     width: 100vw;
-    height: 100px;
+    height: fit-content;
     padding-top: 10px;
     padding-bottom: 10px;
 }
 
+.button-container{
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+    max-width: 450px;
+    padding: 10px;
+    padding-left: 0px;
+    padding-right: 0px;
+    margin: auto;
+}
+
 .tool-button{
     display: flex;
-    width: 200px;
+    width: 40%;
     height: auto;
     margin: auto;
     padding: 5px;
     border-radius: 4px;
     background-color: white;
-    font-size: larger;
+    font-size: 15px;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     justify-content: center;
 }

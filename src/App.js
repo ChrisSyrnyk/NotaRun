@@ -93,8 +93,10 @@ function App() {
       removalAccountedFor = {removalAccountedFor}
       />
       <div className='tool-bar'>
-        <div className='tool-button' onClick={()=> removeLastMarker()}>Remove Last Marker</div>
-        <div className='tool-button' onClick={()=> clearAllMarkers()}>Clear All Markers</div>
+        <div className='button-container'>
+          <div className='tool-button' onClick={()=> removeLastMarker()}>Remove Last Marker</div>
+          <div className='tool-button' onClick={()=> clearAllMarkers()}>Clear All Markers</div>
+        </div>
       </div>
     </>
   );
