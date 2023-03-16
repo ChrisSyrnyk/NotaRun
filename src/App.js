@@ -2,8 +2,9 @@
 import styles from './styles/styles.css'
 import { MapComponent } from './components/MapComponent';
 import React, {useState, useEffect} from 'react';
-import menuIcon from './img/menuIcon.png'
 import DropDownMenu from './components/DropDownMenu';
+import Header from './components/Header';
+import Toolbar from './components/Toolbar';
 
 function App() {
 
@@ -72,10 +73,9 @@ function App() {
 
   return (
     <>
-      <div className='header-container'>
-        <img src = {menuIcon} className='burger' onClick={()=>toggleDropDown()}></img>
-        <div className='site-name'>Nota<div className='bold-font'>R</div>un</div>
-      </div>
+      <Header 
+      toggleDropDown = {toggleDropDown}
+      />
       <DropDownMenu 
       displayDropDown = {displayDropDown} 
       setUnits = {setUnits} units = {units}
@@ -92,12 +92,10 @@ function App() {
       setRemovalAccountedFor = {setRemovalAccountedFor} 
       removalAccountedFor = {removalAccountedFor}
       />
-      <div className='tool-bar'>
-        <div className='button-container'>
-          <div className='tool-button' onClick={()=> removeLastMarker()}>Remove Last Marker</div>
-          <div className='tool-button' onClick={()=> clearAllMarkers()}>Clear All Markers</div>
-        </div>
-      </div>
+      <Toolbar
+      removeLastMarker = {removeLastMarker}
+      clearAllMarkers = {clearAllMarkers}
+      />
     </>
   );
 }
