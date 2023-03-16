@@ -14,7 +14,6 @@ const LocationComponent = (props) =>{
                 setLocationFound(true)
             });
         } else {
-            console.log('else');
             props.centerView(props.currentLocation)
         }
     }

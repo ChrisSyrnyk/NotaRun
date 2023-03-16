@@ -41,12 +41,14 @@ export const MapComponent = (props) => {
   })
 
 
-  function leafletLocate(_callback, locationState){
-    mapRef.current.locate({setView: true})
+  function leafletLocate(_callback){
+    mapRef.current.locate({setView: false})
       .on('locationfound', function(e){
         //var marker = L.marker([e.latitude, e.longitude]).bindPopup('Your are here :)');
-        
-          var outerCircle = L.circle([e.latitude, e.longitude], e.accuracy/2, {
+          mapRef.current.flyTo([e.latitude, e.longitude], 17);
+          //wait till fly to has finished by using zoomend event
+          mapRef.current.on('zoomend', function () {
+            var outerCircle = L.circle([e.latitude, e.longitude], e.accuracy/2, {
               weight: 2,
               color: 'rgb(0,191,255)',
               fillColor: 'white',
@@ -62,8 +64,8 @@ export const MapComponent = (props) => {
           mapRef.current.addLayer(innerCircle);
           //update current location
           props.setCurrentLocation([e.latitude, e.longitude])
-
-        _callback();
+          _callback(); //call back to location component
+        });
       })
       .on('locationerror', function(e){
             console.log(e);
