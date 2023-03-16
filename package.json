@@ -1,5 +1,6 @@
 {
-  "name": "http://ChrisSyrnyk.github.io/Redirect",
+  "homepage": "http://ChrisSyrnyk.github.io/Redirect",
+  "name": "Redirect",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
