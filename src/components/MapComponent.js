@@ -16,20 +16,9 @@ L.Icon.Default.mergeOptions({
 
 export const MapComponent = (props) => {
   const mapRef = useRef();
-  
-  function handleSetView(coordinates, zoom){
-    mapRef.current.setView(coordinates, zoom);
-  }
-
-  useEffect(() => {
-    if (mapRef.current !== null){
-      handleSetView(props.center, props.zoom);
-    }
-    
-  }, props.center); //Once location changes
 
   useEffect(()=>{
-    if(mapRef.current != null && props.RemovalAccountedFor != true){
+    if(mapRef.current !== null && props.removalAccountedFor !== true){
       let lastMarker = props.markers.length - 1;
       if(lastMarker >= 0){
         let lat = props.markers[lastMarker]._latlng.lat;

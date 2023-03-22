@@ -11,7 +11,7 @@ const LocationComponent = (props) =>{
             setLocating(true);
             props.leafletLocate(function(){
                 setLocating(false);
-                setLocationFound(true)
+                setLocationFound(true);
             });
         } else {
             props.centerView(props.currentLocation)
@@ -24,7 +24,7 @@ const LocationComponent = (props) =>{
         )
         } else {
             return(
-                <img src = {locatingIcon} onClick={()=> props.leafletLocate()} className='location-button'></img>
+                <img src = {locatingIcon} className='location-button'></img>
             )
         }
 }
