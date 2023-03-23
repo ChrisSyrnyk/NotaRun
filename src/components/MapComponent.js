@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect, useRef, useMemo} from 'react';
 import { MapContainer, TileLayer, Marker, useMapEvents, Polyline} from "react-leaflet";
 import 'leaflet/dist/leaflet.css';
 import L, { map, marker } from 'leaflet';
@@ -71,8 +71,13 @@ export const MapComponent = (props) => {
   function MyComponent() {
     const map = useMapEvents({
       click: (e) => {
-        console.log(e.latlng);
-        AddMarker(e.latlng);
+        if(props.moveInProgress === false){
+          console.log('click registered')
+          console.log(e.latlng);
+          AddMarker(e.latlng);
+        } else {
+          props.setMoveInProgress(false);
+        }
       }
     })
     return null
@@ -81,15 +86,14 @@ export const MapComponent = (props) => {
     
 
   function AddMarker(location){
-    console.log('ran')
-    let tempMarkers = [...props.markers];
-    //var newMarker = [location.lat, location.lng];
-    var newMarker = L.marker([location.lat, location.lng])
-    
-    
-    tempMarkers.push(newMarker);
-    props.setMarkers(tempMarkers);
-    mapRef.current.panTo(new L.LatLng(location.lat, location.lng))
+      console.log('marker added')
+      let tempMarkers = [...props.markers];
+      //var newMarker = [location.lat, location.lng];
+      var newMarker = L.marker([location.lat, location.lng])
+      newMarker.moving = false;
+      tempMarkers.push(newMarker);
+      props.setMarkers(tempMarkers);
+      mapRef.current.panTo(new L.LatLng(location.lat, location.lng))
   }
     
   //styling
@@ -118,7 +122,41 @@ export const MapComponent = (props) => {
     }
   }
 
-    
+  const eventHandlers = useMemo(() => ({
+    dragend(e) {
+      console.log(e.target.getLatLng());
+      let tempMarkersList = [...props.markers];
+      let i = 0;
+      while(i<tempMarkersList.length){
+        if(tempMarkersList[i].moving == true){
+          tempMarkersList[i].moving = false;
+          tempMarkersList[i]._latlng = e.target.getLatLng();
+          console.log('replaced');
+          break;
+        };
+        i++;
+      }
+      props.setMarkers(tempMarkersList);
+      props.setMoveInProgress(true);
+    },
+    dragstart(e){
+      console.log(e.target.getLatLng());
+      let tempMarkersList = props.markers;
+      let i = 0;
+      while(i<tempMarkersList.length){
+        if(tempMarkersList[i]._latlng == e.target.getLatLng()){
+          tempMarkersList[i].moving = true;
+          console.log('found');
+          break;
+        };
+        i++;
+      }
+      props.setMarkers(tempMarkersList);
+      
+    }
+  }))
+
+
     
   return (
     
@@ -143,8 +181,9 @@ export const MapComponent = (props) => {
           <Marker 
             key={`marker-${idx}`} 
             position={position.getLatLng()}
-            draggable={false}
-            icon= {customIcon} 
+            draggable={true}
+            icon= {customIcon}
+            eventHandlers={eventHandlers}
           >
           </Marker>
           )}

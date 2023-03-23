@@ -15,6 +15,8 @@ function App() {
   const[displayDropDown, setDisplayDropDown] = useState(false);         //dropdown state
   const[units, setUnits] = useState('metric');                          //units displayed
   const[removalAccountedFor, setRemovalAccountedFor] = useState(true);  //removed last marker
+  const[moveInProgress, setMoveInProgress] = useState(false);
+
 
   //Drop down menu toggle
   function toggleDropDown(){
@@ -29,6 +31,8 @@ function App() {
   useEffect(() => {
     totalDistance(); // recalculate distance when markers change
 }, [markers]);
+
+
 
   function removeLastMarker(){
     let tempMarkers = [... markers];
@@ -58,6 +62,7 @@ function App() {
 
   //Calculate total distance
   function totalDistance(){
+    console.log('calculating distance')
     let i = 0;
     let km = 0;
     while (i+1 < markers.length){
@@ -70,6 +75,10 @@ function App() {
     setDistance(km);
     return km;
   }
+
+  //update markers latlong
+
+  
 
   return (
     <>
@@ -91,6 +100,8 @@ function App() {
       currentLocation = {currentLocation}
       setRemovalAccountedFor = {setRemovalAccountedFor} 
       removalAccountedFor = {removalAccountedFor}
+      moveInProgress = {moveInProgress}
+      setMoveInProgress = {setMoveInProgress}
       />
       <Toolbar
       removeLastMarker = {removeLastMarker}
