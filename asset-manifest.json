@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/NotaRun/static/css/main.2eaafa66.css",
-    "main.js": "/NotaRun/static/js/main.914f4e6f.js",
+    "main.js": "/NotaRun/static/js/main.f78392d4.js",
     "static/media/locatingIcon.png": "/NotaRun/static/media/locatingIcon.26fe7ea49b46bf2de25a.png",
     "static/media/currentLocation.png": "/NotaRun/static/media/currentLocation.b88fd2c9640ec80fe903.png",
     "static/media/menuIcon.png": "/NotaRun/static/media/menuIcon.a0112268c30589ffb806.png",
     "index.html": "/NotaRun/index.html",
     "main.2eaafa66.css.map": "/NotaRun/static/css/main.2eaafa66.css.map",
-    "main.914f4e6f.js.map": "/NotaRun/static/js/main.914f4e6f.js.map"
+    "main.f78392d4.js.map": "/NotaRun/static/js/main.f78392d4.js.map"
   },
   "entrypoints": [
     "static/css/main.2eaafa66.css",
-    "static/js/main.914f4e6f.js"
+    "static/js/main.f78392d4.js"
   ]
 }
