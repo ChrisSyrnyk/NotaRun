@@ -7,6 +7,7 @@ NotaRun is a web application which allows users to mark out runs and determine t
 # Goals
 - Utilize the open source javascript mapping library React Leaflet
 - Implement Geolocation
+- Provide runners with a simple platform for planning distance based runs
 
 # Built with
 - React.js
