@@ -4,6 +4,8 @@ NotaRun is a web application which allows users to mark out runs and determine t
 
 [View Project](https://chrissyrnyk.github.io/NotaRun/)
 
+![DisplayPhoto](https://github.com/ChrisSyrnyk/NotaRun/blob/main/src/img/NotaRun-display.png)
+
 # Goals
 - Utilize the open source javascript mapping library React Leaflet
 - Implement Geolocation
